@@ -1,0 +1,10 @@
+services:
+  app:
+    build: .
+    container_name: banksys-szai4
+    ports:
+      - "8004:8501"
+    volumes:
+      - ./data:/app/data:ro
+      - ./models:/app/models
+    restart: unless-stopped
