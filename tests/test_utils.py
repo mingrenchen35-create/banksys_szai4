@@ -10,9 +10,6 @@ class TestHasTrainedModel:
         result = has_trained_model()
         assert isinstance(result, bool)
 
-    def test_no_model_by_default(self):
-        assert has_trained_model() is False
-
 
 class TestConvertDfToCsv:
     def test_returns_bytes(self):

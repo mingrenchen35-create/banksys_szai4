@@ -1,8 +1,8 @@
 """Data analysis page: interactive EDA for bank marketing data."""
 
-import streamlit as st
 import pandas as pd
 import plotly.express as px
+import streamlit as st
 
 from src.data_loader import (
     CATEGORICAL_COLS,
@@ -33,9 +33,7 @@ feature_types = get_feature_types()
 st.sidebar.header("数据概览")
 st.sidebar.metric("样本数", f"{summary['n_rows']:,}")
 st.sidebar.metric("特征数", summary["n_cols"])
-st.sidebar.metric(
-    "缺失值列数", sum(1 for v in summary["missing_pct"].values() if v > 0)
-)
+st.sidebar.metric("缺失值列数", sum(1 for v in summary["missing_pct"].values() if v > 0))
 
 # ── Tabs ─────────────────────────────────────────────────────────────
 tab1, tab2, tab3, tab4, tab5 = st.tabs(
@@ -51,9 +49,7 @@ with tab1:
     with col1:
         target_counts = df[TARGET_COL].value_counts().reset_index()
         target_counts.columns = ["subscribe", "count"]
-        fig = px.bar(
-            target_counts, x="subscribe", y="count", text="count", color="subscribe"
-        )
+        fig = px.bar(target_counts, x="subscribe", y="count", text="count", color="subscribe")
         st.plotly_chart(fig, use_container_width=True)
     with col2:
         st.dataframe(
@@ -117,9 +113,7 @@ with tab4:
     sample_size = st.slider(
         "采样数量(大数据量时建议采样)", 500, len(df), min(5000, len(df)), step=500
     )
-    df_sample = (
-        df.sample(n=sample_size, random_state=42) if sample_size < len(df) else df
-    )
+    df_sample = df.sample(n=sample_size, random_state=42) if sample_size < len(df) else df
     fig = px.scatter(
         df_sample,
         x=x_feat,
@@ -154,9 +148,7 @@ with tab5:
             "缺失率(%)": missing_pct.values,
         }
     )
-    missing_df = missing_df[missing_df["缺失数"] > 0].sort_values(
-        "缺失数", ascending=False
-    )
+    missing_df = missing_df[missing_df["缺失数"] > 0].sort_values("缺失数", ascending=False)
 
     if missing_df.empty:
         st.success("数据集无缺失值。")
