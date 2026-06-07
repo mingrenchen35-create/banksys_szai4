@@ -1,7 +1,4 @@
-# Data files (large, public dataset)
-data/
-
-# Model artifacts
+# Model artifacts (generated at runtime)
 models/
 !models/.gitkeep
 
