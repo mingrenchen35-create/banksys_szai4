@@ -5,6 +5,7 @@ from pathlib import Path
 
 import pandas as pd
 from sklearn.compose import ColumnTransformer
+from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.impute import SimpleImputer
 from sklearn.metrics import (
     accuracy_score,
@@ -16,7 +17,6 @@ from sklearn.metrics import (
 from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
-from xgboost import XGBClassifier
 
 from src.data_loader import CATEGORICAL_COLS, NUMERIC_COLS, TARGET_COL
 
@@ -71,13 +71,11 @@ def train_model() -> tuple[Pipeline, dict]:
     x_train, x_val, y_train, y_val = load_train_val()
 
     preprocessor = _build_preprocessor()
-    clf = XGBClassifier(
+    clf = GradientBoostingClassifier(
         n_estimators=200,
         max_depth=6,
         learning_rate=0.1,
         random_state=42,
-        eval_metric="logloss",
-        verbosity=0,
     )
 
     pipeline = Pipeline(steps=[("preprocessor", preprocessor), ("classifier", clf)])
