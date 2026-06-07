@@ -45,9 +45,27 @@ NUMERIC_SLIDER_CONFIG = {
     "pdays": {"min": 0, "max": 1048, "default": 999, "step": 1, "label": "距上次联系天数"},
     "previous": {"min": 0, "max": 6, "default": 0, "step": 1, "label": "之前联系次数"},
     "emp_var_rate": {"min": -3.4, "max": 1.4, "default": 0.0, "step": 0.1, "label": "就业变化率"},
-    "cons_price_index": {"min": 87.64, "max": 99.46, "default": 93.5, "step": 0.01, "label": "消费者物价指数"},
-    "cons_conf_index": {"min": -53.28, "max": -25.55, "default": -40.0, "step": 0.01, "label": "消费者信心指数"},
-    "lending_rate3m": {"min": 0.6, "max": 5.27, "default": 3.9, "step": 0.01, "label": "3个月贷款利率"},
+    "cons_price_index": {
+        "min": 87.64,
+        "max": 99.46,
+        "default": 93.5,
+        "step": 0.01,
+        "label": "消费者物价指数",
+    },
+    "cons_conf_index": {
+        "min": -53.28,
+        "max": -25.55,
+        "default": -40.0,
+        "step": 0.01,
+        "label": "消费者信心指数",
+    },
+    "lending_rate3m": {
+        "min": 0.6,
+        "max": 5.27,
+        "default": 3.9,
+        "step": 0.01,
+        "label": "3个月贷款利率",
+    },
     "nr_employed": {"min": 4715, "max": 5490, "default": 5134, "step": 1, "label": "就业人数"},
 }
 
