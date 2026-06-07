@@ -39,6 +39,19 @@ def render_metrics(metrics: dict):
     col5.metric("F1", f"{metrics['f1']:.4f}")
 
 
+NUMERIC_SLIDER_CONFIG = {
+    "age": {"min": 16, "max": 101, "default": 38, "step": 1, "label": "年龄"},
+    "campaign": {"min": 0, "max": 57, "default": 1, "step": 1, "label": "营销次数"},
+    "pdays": {"min": 0, "max": 1048, "default": 999, "step": 1, "label": "距上次联系天数"},
+    "previous": {"min": 0, "max": 6, "default": 0, "step": 1, "label": "之前联系次数"},
+    "emp_var_rate": {"min": -3.4, "max": 1.4, "default": 0.0, "step": 0.1, "label": "就业变化率"},
+    "cons_price_index": {"min": 87.64, "max": 99.46, "default": 93.5, "step": 0.01, "label": "消费者物价指数"},
+    "cons_conf_index": {"min": -53.28, "max": -25.55, "default": -40.0, "step": 0.01, "label": "消费者信心指数"},
+    "lending_rate3m": {"min": 0.6, "max": 5.27, "default": 3.9, "step": 0.01, "label": "3个月贷款利率"},
+    "nr_employed": {"min": 4715, "max": 5490, "default": 5134, "step": 1, "label": "就业人数"},
+}
+
+
 def render_prediction_form():
     st.subheader("客户特征输入")
 
@@ -47,8 +60,15 @@ def render_prediction_form():
 
     for i, feat in enumerate(PREDICTION_NUMERIC):
         col = [col1, col2, col3][i % 3]
-        default_val = 0.0
-        input_data[feat] = col.number_input(f"{feat}", value=default_val, key=f"num_{feat}")
+        cfg = NUMERIC_SLIDER_CONFIG.get(feat, {})
+        input_data[feat] = col.slider(
+            cfg.get("label", feat),
+            min_value=cfg.get("min", 0.0),
+            max_value=cfg.get("max", 100.0),
+            value=cfg.get("default", 0.0),
+            step=cfg.get("step", 1.0),
+            key=f"num_{feat}",
+        )
 
     st.markdown("---")
 
